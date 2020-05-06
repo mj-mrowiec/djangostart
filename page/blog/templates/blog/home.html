@@ -1,21 +1,8 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if title %}
-        <title>My firs blog - {{ title }}</title>
-    {% else %}
-        <title>My firs blog!</title>
-    {% endif %}
-    
-</head>
-<body>
+{% extends 'blog/base.html' %}
+{% block content %}
     {%for post in posts%}
         <h1>title of my blog is: {{ post.title }}</h1>
         <p>created by: {{ post.author }} at {{ post.date }}</p>
         <p> {{ post.content }}</p>
     {% endfor %}
-
-    <h1>This is my home page</h1>
-</body>
-</html>
+{% endblock content %}
