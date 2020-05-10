@@ -2,6 +2,6 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def about(request):
+def home(request):
     
-    return render(request, 'about/home.html',{'title':'About me'})
+    return render(request, 'about/home.html', {'title':'About me'})
