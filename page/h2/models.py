@@ -5,7 +5,8 @@ from django.db import models
 
 class Customer(models.Model):
     CUST_TYPE = (('PRIVATE','PRIVATE'),
-                ('BUSINESS','BUSINESS'))
+                ('BUSINESS','BUSINESS'),
+                )
     name = models.CharField(max_length = 200, null = True)
     phone = models.CharField(max_length = 200, null = True)
     email = models.CharField(max_length = 200, null = True)
@@ -18,7 +19,7 @@ class Customer(models.Model):
 class Product(models.Model):
     PROD_CAT = (('Domestic','Domestic'),
                 ('Out Dor','Out Dor'),
-                ('Distinct','Distinct')
+                ('Distinct','Distinct'),
     )
     name = models.CharField(max_length = 200, null = True)
     category = models.CharField(max_length = 200, choices = PROD_CAT)
@@ -31,11 +32,11 @@ class Product(models.Model):
 class Order(models.Model):
     ORDER_STATUS = (('PENDING','PENDING'),
                     ('ORDERED','ORDERED'),
-                    ('RETURNED','RETURNED')
+                    ('RETURNED','RETURNED'),
                     )
     name = models.CharField(max_length = 200, null = False, choices = ORDER_STATUS)
-    #product
-    #Customer
+    product = models.ForeignKey(Product, null = True, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null = True, on_delete=models.SET_NULL)
     order_date = models.DateTimeField(max_length = 200, null = True, auto_now_add=True)
 
     def __str__(self):
