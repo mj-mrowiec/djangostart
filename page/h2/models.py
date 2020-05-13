@@ -16,19 +16,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-class Product(models.Model):
-    PROD_CAT = (('Domestic','Domestic'),
-                ('Out Dor','Out Dor'),
-                ('Distinct','Distinct'),
-    )
-    name = models.CharField(max_length = 200, null = True)
-    category = models.CharField(max_length = 200, choices = PROD_CAT)
-    price = models.FloatField(null = False)
-    date_add = models.DateTimeField(auto_now_add=True, null = True)
-
-    def __str__(self):
-        return self.name
-
 class Tag(models.Model):
     TAG_CAT = (('New','New'),
                 ('Existing','Existing'),
@@ -38,6 +25,20 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class Product(models.Model):
+    PROD_CAT = (('Domestic','Domestic'),
+                ('Out Dor','Out Dor'),
+                ('Distinct','Distinct'),
+    )
+    name = models.CharField(max_length = 200, null = True)
+    category = models.CharField(max_length = 200, choices = PROD_CAT)
+    description = models.CharField(max_length = 200, null = True, blank = True)
+    price = models.FloatField(null = False)
+    date_add = models.DateTimeField(auto_now_add=True, null = True)
+    tags = models.ManyToManyField(Tag, null = True)
+    
+    def __str__(self):
+        return self.name
 
 class Order(models.Model):
     ORDER_STATUS = (('PENDING','PENDING'),
@@ -48,7 +49,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null = True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer, null = True, on_delete=models.SET_NULL)
     order_date = models.DateTimeField(max_length = 200, null = True, auto_now_add=True)
-    tags = models.ManyToManyField(Tag, null = True)
+    
 
     def __str__(self):
         return self.name
