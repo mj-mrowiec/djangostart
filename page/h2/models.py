@@ -27,3 +27,16 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    ORDER_STATUS = (('PENDING','PENDING'),
+                    ('ORDERED','ORDERED'),
+                    ('RETURNED','RETURNED')
+                    )
+    name = models.CharField(max_length = 200, null = False, choices = ORDER_STATUS)
+    #product
+    #Customer
+    order_date = models.DateTimeField(max_length = 200, null = True, auto_now_add=True)
+
+    def __str__(self):
+        return self.name
