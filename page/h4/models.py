@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Customer(models.Model):
@@ -47,3 +48,16 @@ class Order(models.Model):
     name = models.CharField(max_length = 200, choices = ORDER_STATUS)
     product = models.ForeignKey(Product, null = True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer, null = True, on_delete=models.SET_NULL)
+
+def new_profile(sender, instance, created, **kwargs):
+    if created:
+        Customer.object.created(user=instance)
+        print('Created')
+
+def update_profile(sender, instance, created, **kwargs):
+    if created == False:
+        instance.profile.save()
+        print('Updated')
+
+post_save.connect(new_profile, sender=User)
+post_save.connect(update_profile, sender=User)
