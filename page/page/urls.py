@@ -20,7 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('about/', include('about.urls')),
-    path('h2home/', include('h2.urls')),
-    path('h1home/', include('h1.urls')),
-    path('h4home',include('h4.urls')),
 ]
