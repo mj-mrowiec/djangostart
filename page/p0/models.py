@@ -4,21 +4,27 @@ from django.db.models.signals import post_save
 
 
 # Create your models here.
-
-class Profiles(models.Model):
-    name = models.CharField(max_length = 200, null = True)
+class Profile(models.Model):
+    user = models.CharField(max_length = 200, null = True, blank = True)
+    fname = models.CharField(max_length = 200, null = True)
+    lname = models.CharField(max_length = 200, null = True)
 
     def __str__(self):
-        return self.name
+        return str(self.user)
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.ocjecs.created(User = instance)
+        Profile.objects.create(user = instance)
         print('Profile has been created')
+post_save.connect(create_profile, sender=User)
+
 
 def updated_profile(sender, instance, created, **kwargs):
     if created == False:
-        instance.Profile.save()
-
-post_save.connect(create_profile, sender=User)
-post_save.connect(create_profile, sender=User)
+        try:
+            instance.profile.save()
+            print('updated!')
+        except:
+            Profile.objects.create(user=instance)
+            print('profile created for existing user')
+post_save.connect(updated_profile, sender=User)
