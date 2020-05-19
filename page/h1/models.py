@@ -34,7 +34,7 @@ class Order(models.Model):
         ('Delivered','Delivered'),
         ('Returned','Returned')
     )
-    #customer = a
-    #product = b
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add = True, null = True)
     status = models.CharField(max_length = 200, null = True, choices = STATUS)
