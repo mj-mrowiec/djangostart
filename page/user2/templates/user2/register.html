@@ -2,7 +2,25 @@
 
 {% block content%}
 
+<div class="content-selection">
+    <form method="POST">
+        <fieldset class="form-group">
+            <!-- This is where all my form content will be stored-->
+            <legend class="border-bottom mb-4">Join Today</legend>
+            <!-- Place for the form itself from views-->
+            {{ form.as_p}}
+        </fieldset>
 
-
+        <!-- what is going to be presented below the form fields-->
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Sign in</button>
+        </div>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="#">Sign in</a>
+            </small>
+        </div>
+    </form>
+</div>
 
 {%endblock content%}
