@@ -1,8 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from .forms import UserRegistrationForm
 
 def register2(request):
     #form = UserCreationForm()
-    form = UserRegistrationForm()
+    if request.method == 'POST':
+        form = UserRegistrationForm()
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.sucess(f'New account has been creater for the user {username}')
+            return redirect('blog-home')
+    else:
+        form = UserRegistrationForm()
     return render(request, 'user2/register.html', {'form': form})
