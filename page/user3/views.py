@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 
 def register(request):
     
-    if request.methods == 'POST':
+    if request.method == 'POST':
         form = UserCreationForm(request.POST)
         print('POST request raised')
         if form.is_valid():
             print('save it into the db')
+    else:
+        form = UserCreationForm()
     return render(request, 'user3/register.html', {'form':form})
