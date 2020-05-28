@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.dispatch import reciver
+from django.dispatch import receiver
 
 
 class Customer(models.Model):
@@ -18,7 +18,7 @@ class Customer(models.Model):
 class Profile(models.Model):
     name = models.CharField(max_length = 200)
 
-@reciver(post_save, sender = User)
+@receiver(post_save, sender = User)
 def new_profile(sender, instance, created, **kwargs):
     if created:
         Profile.object.create(user = instance)
