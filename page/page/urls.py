@@ -24,6 +24,4 @@ urlpatterns = [
     path('register/', user_views.register, name = 'register'),
     path('', include('blog.urls')),
     path('about/', include('about.urls')),
-    path('register2/', user2_views.register2, name = 'register2'),
-    path('register3/', user3_views.register ,name='register3'),
 ]
