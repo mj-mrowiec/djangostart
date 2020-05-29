@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'h5.apps.H5Config',
     'user3.apps.User3Config',
     'user2.apps.User2Config',
     'users.apps.UsersConfig',
