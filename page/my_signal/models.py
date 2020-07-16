@@ -16,8 +16,4 @@ def profile_update(sender, instance, created, **kwargs):
     if created == False:
         instance.profile.save()
 
-def profile_update_2(sender, instance, created, **kwargs):
-    if created == False:
-        instance.profile.save()
-
 post_save.connect(profile_save, sender = User)
