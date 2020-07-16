@@ -17,6 +17,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
 
+# if the other message is needed
 #messages.debug
 #messages.success
 #messages.warning
